@@ -1005,3 +1005,46 @@ function open_form(frm, doctype, child_doctype, parentfield) {
 		]);
 	});
 }
+frappe.ui.form.on('Item', {
+   refresh: function(frm) {
+       // Create a button to generate EAN-13 barcode
+       frm.add_custom_button(__('Generate EAN Barcode'), function() {
+           generateEANBarcode(frm);
+       });
+   }
+});
+// Function to generate EAN barcode
+function generateEANBarcode(frm) {
+   // Assuming the child table is named "barcodes" and has a field named "barcode"
+   if (frm.doc.barcodes && frm.doc.barcodes.length > 0) {
+       frappe.msgprint(__('Barcode already exists in the child table.'));
+   } else {
+       let baseNumber = String(Math.floor(100000000000 + Math.random() * 900000000000));
+       let barcode = calculateEAN13Checksum(baseNumber);
+       // Add a new row to the Barcodes child table
+       let new_row = frm.add_child('barcodes', {
+           barcode: barcode,  // Set the barcode field value in the child table
+           barcode_type: 'EAN'  // Set the barcode type as EAN
+       });
+       // Refresh the field to display the newly added row
+       frm.refresh_field('barcodes');
+       // Display success message
+       frappe.msgprint({
+           title: __('Success'),
+           indicator: 'green',
+           message: __('Barcode successfully generated: ') + barcode
+       });
+       // Auto-save the form after generating the barcode
+       frm.save_or_update();
+   }
+}
+// Function to calculate EAN-13 checksum
+function calculateEAN13Checksum(baseNumber) {
+   let sum = 0;
+   for (let i = 0; i < baseNumber.length; i++) {
+       let digit = parseInt(baseNumber.charAt(i));
+       sum += (i % 2 === 0) ? digit : digit * 3;
+   }
+   let checksum = (10 - (sum % 10)) % 10;
+   return baseNumber + checksum.toString();
+}
