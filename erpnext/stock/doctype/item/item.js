@@ -1007,46 +1007,89 @@ function open_form(frm, doctype, child_doctype, parentfield) {
 }
 frappe.ui.form.on('Item', {
     refresh: function(frm) {
-        // Add button to generate EAN barcode
+        // Create a button to generate EAN-13 barcode
         frm.add_custom_button(__('Generate EAN Barcode'), function() {
-            frappe.call({
-                method: 'your_app_name.item.generate_ean_barcode', // Call the Python method to generate the barcode
-                args: {
-                    item_code: frm.doc.item_code
-                },
-                callback: function(r) {
-                    if (r.message) {
-                        // Set the barcode and barcode type
-                        frm.set_value('barcode', r.message);
-                        frm.set_value('barcode_type', 'EAN');
-
-                        // Display success message
-                        frappe.msgprint(__('Barcode successfully generated'));
-
-                        // Update the barcode preview if the barcode is available
-                        if (frm.doc.barcode) {
-                            let barcode_svg = '<svg id="barcode"></svg>';
-                            frm.set_df_property('barcode_preview', 'options', barcode_svg); // Set HTML field for barcode preview
-
-                            // Render the barcode after ensuring the element is available
-                            setTimeout(function() {
-                                let barcode_element = document.querySelector("#barcode");
-                                if (barcode_element) {
-                                    JsBarcode(barcode_element, frm.doc.barcode, {
-                                        format: "EAN13",
-                                        lineColor: "#000",
-                                        width: 2,
-                                        height: 100,
-                                        displayValue: true
-                                    });
-                                } else {
-                                    console.error("No element to render barcode on.");
-                                }
-                            }, 500); // Delay to ensure the SVG element is rendered before applying JsBarcode
-                        }
-                    }
-                }
-            });
+            generateEANBarcode(frm);
         });
+
+        // Render the barcode visually if it exists
+        if (frm.doc.barcodes && frm.doc.barcodes.length > 0) {
+            let barcode = frm.doc.barcodes[0].barcode;
+            renderBarcode(frm, barcode);
+        }
     }
 });
+
+// Function to generate EAN barcode
+function generateEANBarcode(frm) {
+    // Assuming the child table is named "barcodes" and has a field named "barcode"
+    if (frm.doc.barcodes && frm.doc.barcodes.length > 0) {
+        frappe.msgprint(__('Barcode already exists in the child table.'));
+    } else {
+        let baseNumber = String(Math.floor(100000000000 + Math.random() * 900000000000));
+        let barcode = calculateEAN13Checksum(baseNumber);
+
+        // Add a new row to the Barcodes child table
+        let new_row = frm.add_child('barcodes', {
+            barcode: barcode,  // Set the barcode field value in the child table
+            barcode_type: 'EAN'  // Set the barcode type as EAN
+        });
+
+        // Refresh the field to display the newly added row
+        frm.refresh_field('barcodes');
+
+        // Display success message
+        frappe.msgprint({
+            title: __('Success'),
+            indicator: 'green',
+            message: __('Barcode successfully generated: ') + barcode
+        });
+
+        // Render the barcode visually
+        renderBarcode(frm, barcode);
+
+        // Auto-save the form after generating the barcode
+        frm.save_or_update();
+    }
+}
+
+// Function to calculate EAN-13 checksum
+function calculateEAN13Checksum(baseNumber) {
+    let sum = 0;
+
+    for (let i = 0; i < baseNumber.length; i++) {
+        let digit = parseInt(baseNumber.charAt(i));
+        sum += (i % 2 === 0) ? digit : digit * 3;
+    }
+
+    let checksum = (10 - (sum % 10)) % 10;
+    return baseNumber + checksum.toString();
+}
+
+// Function to render barcode visually
+function renderBarcode(frm, barcode) {
+    // Check if the barcode element already exists
+    let barcode_element = document.querySelector("#barcode");
+    
+    // If the element does not exist, create it
+    if (!barcode_element) {
+        let $barcode = $('<div id="barcode"></div>').appendTo(frm.fields_dict['barcodes_html'].wrapper);
+        $barcode.css({ 'margin-top': '15px' });
+
+        // Update barcode_element after appending
+        barcode_element = document.querySelector("#barcode");
+    }
+
+    // Generate the barcode if the element is available
+    if (barcode_element) {
+        JsBarcode("#barcode", barcode, {
+            format: "EAN13",
+            lineColor: "#000",  // Black color for barcode lines
+            width: 2,
+            height: 100,  // Adjust height as needed
+            displayValue: true  // Display the barcode value below the lines
+        });
+    } else {
+        console.error("No element to render barcode on.");
+    }
+}
