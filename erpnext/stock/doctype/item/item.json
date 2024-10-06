@@ -306,6 +306,12 @@
    "options": "Item Barcode"
   },
   {
+    "fieldname": "barcode_preview",
+    "label": "Barcode Preview",
+    "fieldtype": "HTML",
+    "read_only": 1
+},
+  {
    "collapsible": 1,
    "collapsible_depends_on": "is_stock_item",
    "depends_on": "is_stock_item",
