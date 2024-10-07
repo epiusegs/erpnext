@@ -1082,3 +1082,19 @@ function renderBarcode(frm, barcode) {
         console.error("HTML field 'barcodes_html' not found or doesn't have a wrapper.");
     }
 }
+
+// Frappe form event to add a button and preview existing barcodes
+frappe.ui.form.on('Item', {
+    refresh: function(frm) {
+        // Create a button to generate EAN-13 barcode
+        frm.add_custom_button(__('Generate EAN Barcode'), function() {
+            generateEANBarcode(frm);
+        });
+
+        // Render the barcode visually if it exists
+        if (frm.doc.barcodes && frm.doc.barcodes.length > 0) {
+            let barcode = frm.doc.barcodes[0].barcode;
+            renderBarcode(frm, barcode);
+        }
+    }
+});
