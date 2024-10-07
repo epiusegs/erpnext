@@ -1005,21 +1005,6 @@ function open_form(frm, doctype, child_doctype, parentfield) {
 		]);
 	});
 }
-frappe.ui.form.on('Item', {
-    refresh: function(frm) {
-        // Create a button to generate EAN-13 barcode
-        frm.add_custom_button(__('Generate EAN Barcode'), function() {
-            generateEANBarcode(frm);
-        });
-
-        // Render the barcode visually if it exists
-        if (frm.doc.barcodes && frm.doc.barcodes.length > 0) {
-            let barcode = frm.doc.barcodes[0].barcode;
-            renderBarcode(frm, barcode);
-        }
-    }
-});
-
 // Function to generate EAN barcode
 function generateEANBarcode(frm) {
     // Assuming the child table is named "barcodes" and has a field named "barcode"
@@ -1068,28 +1053,34 @@ function calculateEAN13Checksum(baseNumber) {
 
 // Function to render barcode visually
 function renderBarcode(frm, barcode) {
-    // Check if the barcode element already exists
-    let barcode_element = document.querySelector("#barcode");
-    
-    // If the element does not exist, create it
-    if (!barcode_element) {
-        let $barcode = $('<div id="barcode"></div>').appendTo(frm.fields_dict['barcodes_html'].wrapper);
-        $barcode.css({ 'margin-top': '15px' });
+    // Ensure that the HTML field exists and has a wrapper
+    if (frm.fields_dict['barcodes_html'] && frm.fields_dict['barcodes_html'].wrapper) {
+        // Check if the barcode element already exists
+        let barcode_element = document.querySelector("#barcode");
 
-        // Update barcode_element after appending
-        barcode_element = document.querySelector("#barcode");
-    }
+        // If the element does not exist, create it
+        if (!barcode_element) {
+            let $barcode = $('<div id="barcode"></div>').appendTo(frm.fields_dict['barcodes_html'].wrapper);
+            $barcode.css({ 'margin-top': '15px' });
 
-    // Generate the barcode if the element is available
-    if (barcode_element) {
-        JsBarcode("#barcode", barcode, {
-            format: "EAN13",
-            lineColor: "#000",  // Black color for barcode lines
-            width: 2,
-            height: 100,  // Adjust height as needed
-            displayValue: true  // Display the barcode value below the lines
-        });
+            // Update barcode_element after appending
+            barcode_element = document.querySelector("#barcode");
+        }
+
+        // Generate the barcode if the element is available
+        if (barcode_element) {
+            JsBarcode("#barcode", barcode, {
+                format: "EAN13",
+                lineColor: "#000",  // Black color for barcode lines
+                width: 2,
+                height: 100,  // Adjust height as needed
+                displayValue: true  // Display the barcode value below the lines
+            });
+        } else {
+            console.error("No element to render barcode on.");
+        }
     } else {
-        console.error("No element to render barcode on.");
+        console.error("HTML field 'barcodes_html' not found or doesn't have a wrapper.");
     }
 }
+
