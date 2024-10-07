@@ -306,10 +306,11 @@
    "options": "Item Barcode"
   },
   {
-    "fieldname": "barcode_preview",
-    "label": "Barcode Preview",
-    "fieldtype": "HTML",
-    "read_only": 1
+  "fieldname": "barcodes_html",
+  "fieldtype": "HTML",
+  "label": "Barcode Preview",
+  "depends_on": "eval:doc.barcodes && doc.barcodes.length > 0",
+  "allow_in_quick_entry": 0
 },
   {
    "collapsible": 1,
