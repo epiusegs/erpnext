@@ -1410,3 +1410,19 @@ def get_child_warehouses(warehouse):
 	from erpnext.stock.doctype.warehouse.warehouse import get_child_warehouses
 
 	return get_child_warehouses(warehouse)
+	
+class Item(Document):
+    def onload(self):
+        # Called when the document is loaded
+        if self.barcodes:
+            self.set_barcodes_html()
+
+    def set_barcodes_html(self):
+        """Set the HTML for barcode preview."""
+        barcodes_html = ''
+        for barcode in self.barcodes:
+            # Assuming 'barcode' has the actual barcode value
+            barcodes_html += f'<div>{barcode.barcode}</div>'
+        
+        # Assign this to the 'barcodes_html' field to render in the frontend
+        self.barcodes_html = barcodes_html
