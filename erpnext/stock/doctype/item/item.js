@@ -976,7 +976,6 @@ frappe.tour["Item"] = [
 		),
 	},
 ];
-
 function open_form(frm, doctype, child_doctype, parentfield) {
 	frappe.model.with_doctype(doctype, () => {
 		let new_doc = frappe.model.get_new_doc(doctype);
@@ -1031,7 +1030,7 @@ function generateEANBarcode(frm) {
         });
 
         // Render the barcode visually
-        renderBarcode(frm, barcode);
+        setTimeout(() => renderBarcode(frm, barcode), 500);  // Add a delay to ensure the field is rendered
 
         // Auto-save the form after generating the barcode
         frm.save_or_update();
@@ -1083,4 +1082,3 @@ function renderBarcode(frm, barcode) {
         console.error("HTML field 'barcodes_html' not found or doesn't have a wrapper.");
     }
 }
-
