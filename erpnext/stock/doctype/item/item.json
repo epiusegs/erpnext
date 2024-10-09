@@ -52,6 +52,7 @@
   "allow_negative_stock",
   "sb_barcodes",
   "barcodes",
+  "barcodes_html",
   "reorder_section",
   "reorder_levels",
   "serial_nos_and_batches",
