@@ -1,4 +1,67 @@
-<svg width="118" height="118" viewBox="0 0 118 118" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M0 20C0 8.9543 8.9543 0 20 0H97.03C108.076 0 117.03 8.9543 117.03 20V97.03C117.03 108.076 108.076 117.03 97.03 117.03H20C8.9543 117.03 0 108.076 0 97.03V20Z" fill="#067EFB"/>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M78.8631 38.557H76.9H51.38H38.6199V28.0872H78.8631V38.557ZM51.3799 63.0955V77.4915H79.1903V87.9612H38.6199V52.6257H51.3799H76.9V63.0955H51.3799Z" fill="white"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 150 150">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+
+      .cls-2 {
+        fill: url(#linear-gradient-4);
+      }
+
+      .cls-3 {
+        fill: url(#linear-gradient-3);
+      }
+
+      .cls-4 {
+        fill: url(#linear-gradient-2);
+      }
+
+      .cls-5 {
+        fill: url(#linear-gradient);
+      }
+
+      .cls-6 {
+        isolation: isolate;
+      }
+
+      .cls-7 {
+        fill: #bbbdbf;
+        mix-blend-mode: multiply;
+      }
+
+      .cls-8 {
+        clip-path: url(#clippath);
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="2.5" y1="75" x2="147.5" y2="75" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0f1a42"/>
+      <stop offset="1" stop-color="#355b7e"/>
+    </linearGradient>
+    <clipPath id="clippath">
+      <rect class="cls-1" x="2.5" y="2.5" width="145" height="145" rx="33.83" ry="33.83"/>
+    </clipPath>
+    <linearGradient id="linear-gradient-2" x1="78.51" y1="130.98" x2="36.87" y2="49.09" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#bbbdbf"/>
+      <stop offset=".84" stop-color="#fff"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-3" x1="108.42" y1="115.76" x2="66.78" y2="33.88" xlink:href="#linear-gradient-2"/>
+    <linearGradient id="linear-gradient-4" x1="110.23" y1="114.85" x2="68.58" y2="32.96" xlink:href="#linear-gradient-2"/>
+  </defs>
+  <g class="cls-6">
+    <g id="Layer_1">
+      <g>
+        <rect class="cls-5" x="2.5" y="2.5" width="145" height="145" rx="33.83" ry="33.83"/>
+        <g class="cls-8">
+          <polygon class="cls-7" points="147.5 126.85 105.01 50.31 93.8 54.74 84.88 52.92 82.6 52.9 67.65 67.72 65.03 67.72 44.85 119.42 78.01 167.8 147.5 167.8 147.5 126.85"/>
+        </g>
+        <g>
+          <polygon class="cls-4" points="44.97 69.91 65.03 50.17 65.03 119.33 44.97 119.33 44.97 69.91"/>
+          <polygon class="cls-3" points="67.65 47.58 82.6 32.88 82.6 52.9 67.65 67.72 67.65 47.58"/>
+          <polygon class="cls-2" points="84.88 30.67 105.03 50.3 105.03 119.33 84.88 119.33 84.88 30.67"/>
+        </g>
+      </g>
+    </g>
+  </g>
 </svg>
