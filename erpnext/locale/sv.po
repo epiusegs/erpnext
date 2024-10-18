@@ -18034,7 +18034,7 @@ msgstr "EMU of current"
 
 #. Label of the erpnext_company (Data) field in DocType 'Tally Migration'
 #: erpnext/erpnext_integrations/doctype/tally_migration/tally_migration.json
-msgid "ERPNext Company"
+msgid "Altrix One Company"
 msgstr "System Bolag"
 
 #. Label of the user_id (Data) field in DocType 'Employee Group Table'
@@ -23203,11 +23203,11 @@ msgid "If this item has variants, then it cannot be selected in sales orders etc
 msgstr "Om artikel har varianter, kan den inte väljas i Försäljning Order osv."
 
 #: erpnext/buying/doctype/buying_settings/buying_settings.js:27
-msgid "If this option is configured 'Yes', ERPNext will prevent you from creating a Purchase Invoice or Receipt without creating a Purchase Order first. This configuration can be overridden for a particular supplier by enabling the 'Allow Purchase Invoice Creation Without Purchase Order' checkbox in the Supplier master."
+msgid "If this option is configured 'Yes', Altrix One will prevent you from creating a Purchase Invoice or Receipt without creating a Purchase Order first. This configuration can be overridden for a particular supplier by enabling the 'Allow Purchase Invoice Creation Without Purchase Order' checkbox in the Supplier master."
 msgstr "Om 'Ja' kommer System att hindra dig från att skapa Inköp Faktura eller Faktura utan att först skapa Inköp Order.Vald konfiguration kan åsidosättas för viss Leverantör genom att aktivera kryssruta 'Tillåt skapande av Inköp Faktura utan Inköp Order' i Leverantör Inställningar."
 
 #: erpnext/buying/doctype/buying_settings/buying_settings.js:34
-msgid "If this option is configured 'Yes', ERPNext will prevent you from creating a Purchase Invoice without creating a Purchase Receipt first. This configuration can be overridden for a particular supplier by enabling the 'Allow Purchase Invoice Creation Without Purchase Receipt' checkbox in the Supplier master."
+msgid "If this option is configured 'Yes', Altrix One will prevent you from creating a Purchase Invoice without creating a Purchase Receipt first. This configuration can be overridden for a particular supplier by enabling the 'Allow Purchase Invoice Creation Without Purchase Receipt' checkbox in the Supplier master."
 msgstr "Om 'Ja' kommer System att hindra dig från att skapa Inköp Faktura utan att skapa Inköp Följesedel.Vald konfiguration kan åsidosättas för viss Leverantör genom att aktivera kryssruta 'Tillåt skapande av Inköp Faktura utan Inköp Följesedel' i Leverantör Inställningar. "
 
 #: erpnext/manufacturing/doctype/manufacturing_settings/manufacturing_settings.js:10
@@ -23229,7 +23229,7 @@ msgid "If yes, then this warehouse will be used to store rejected materials"
 msgstr "Om ja, kommer detta lager att användas för att lagra avvisat material"
 
 #: erpnext/stock/doctype/item/item.js:941
-msgid "If you are maintaining stock of this Item in your Inventory, ERPNext will make a stock ledger entry for each transaction of this item."
+msgid "If you are maintaining stock of this Item in your Inventory, Altrix One will make a stock ledger entry for each transaction of this item."
 msgstr "Om man har denna artikel i Lager, kommer System att lagerbokföra varje transaktion av denna artikel."
 
 #. Description of the 'Unreconciled Entries' (Section Break) field in DocType
@@ -53197,7 +53197,7 @@ msgid "This action will stop future billing. Are you sure you want to cancel thi
 msgstr "Denna åtgärd stoppar framtida fakturering.Fortsätt?"
 
 #: erpnext/accounts/doctype/bank_account/bank_account.js:35
-msgid "This action will unlink this account from any external service integrating ERPNext with your bank accounts. It cannot be undone. Are you certain ?"
+msgid "This action will unlink this account from any external service integrating Altrix One with your bank accounts. It cannot be undone. Are you certain ?"
 msgstr "Detta åtgärd kommer att koppla bort detta konto från alla externa tjänster som integrerar System med  Bank Konto. Det kan inte bli ogjort. Fortsätt ?"
 
 #: erpnext/buying/doctype/supplier_scorecard/supplier_scorecard_dashboard.py:7
@@ -57443,7 +57443,7 @@ msgid "Vouchers"
 msgstr "Verifikat"
 
 #: erpnext/patches/v15_0/remove_exotel_integration.py:32
-msgid "WARNING: Exotel app has been separated from ERPNext, please install the app to continue using Exotel integration."
+msgid "WARNING: Exotel app has been separated from Altrix One, please install the app to continue using Exotel integration."
 msgstr "OBS: Exotel app har separerats från System, installera app för att fortsätta använda Exotelintegration."
 
 #. Label of the wip_composite_asset (Link) field in DocType 'Purchase Invoice
@@ -59040,10 +59040,10 @@ msgstr "Youtube"
 msgid "YouTube Interactions"
 msgstr "YouTube Interaktioner"
 
-#. Description of the 'ERPNext Company' (Data) field in DocType 'Tally
+#. Description of the 'Altrix One Company' (Data) field in DocType 'Tally
 #. Migration'
 #: erpnext/erpnext_integrations/doctype/tally_migration/tally_migration.json
-msgid "Your Company set in ERPNext"
+msgid "Your Company set in Altrix One"
 msgstr "Bolag angiven i System"
 
 #: erpnext/www/book_appointment/index.html:49
