@@ -374,7 +374,7 @@ class TestPurchaseReceipt(IntegrationTestCase):
 		self.assertFalse(frappe.db.get_value("Serial No", pr_row_1_serial_no, "warehouse"))
 
 	def test_rejected_warehouse_filter(self):
-		pr = frappe.copy_doc(test_records[0])
+		pr = frappe.copy_doc(self.globalTestRecords["Purchase Receipt"][0])
 		pr.get("items")[0].item_code = "_Test Serialized Item With Series"
 		pr.get("items")[0].qty = 3
 		pr.get("items")[0].rejected_qty = 2
@@ -383,7 +383,7 @@ class TestPurchaseReceipt(IntegrationTestCase):
 		self.assertRaises(frappe.ValidationError, pr.save)
 
 	def test_rejected_serial_no(self):
-		pr = frappe.copy_doc(test_records[0])
+		pr = frappe.copy_doc(self.globalTestRecords["Purchase Receipt"][0])
 		pr.get("items")[0].item_code = "_Test Serialized Item With Series"
 		pr.get("items")[0].qty = 3
 		pr.get("items")[0].rejected_qty = 2
@@ -3706,6 +3706,21 @@ class TestPurchaseReceipt(IntegrationTestCase):
 
 		self.assertEqual(data[0].get("bal_qty"), 50.0)
 
+	def test_same_stock_and_transaction_uom_conversion_factor(self):
+		item_code = "Test Item for Same Stock and Transaction UOM Conversion Factor"
+		create_item(item_code)
+
+		pr = make_purchase_receipt(
+			item_code=item_code,
+			qty=10,
+			rate=100,
+			stock_uom="Nos",
+			transaction_uom="Nos",
+			conversion_factor=10,
+		)
+
+		self.assertEqual(pr.items[0].conversion_factor, 1.0)
+
 
 def prepare_data_for_internal_transfer():
 	from erpnext.accounts.doctype.sales_invoice.test_sales_invoice import create_internal_supplier
@@ -3954,5 +3969,4 @@ def make_purchase_receipt(**args):
 	return pr
 
 
-test_dependencies = ["BOM", "Item Price", "Location"]
-test_records = frappe.get_test_records("Purchase Receipt")
+EXTRA_TEST_RECORD_DEPENDENCIES = ["BOM", "Item Price", "Location"]
